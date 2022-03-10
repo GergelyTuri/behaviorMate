@@ -1,0 +1,693 @@
+// C++ style '//' comments are permitted to comment out the end of lines
+// but block style i.e. '/*' will not work
+//BeMa 0.0.6b settings_GT
+{
+    "runTraining": { // name for each profile of in this setting file
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsTraining"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_runTraining"
+            }
+        ],
+         "trial_attrs": {
+            "fields": [
+                {
+                    "key": "belt", // if this key matches a field in the
+                                           // settings.json file, the value will
+                                           // be replaced by the entry each
+                                           // trial.
+                    "type": "String"
+                },
+                
+            ]
+            },
+
+    },
+
+    
+
+    "opRF": { // name for each profile of in this setting file
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_opRF"
+            }
+        ],
+        "experimentType": "randomForaging"
+    },
+    
+"ctxRemap": { // name for each profile of in this setting file
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_ctxRemap"
+            }
+        ],
+        "experimentType": "randomForaging"
+    },
+
+    "nopRF": { // name for each profile of in this setting file
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_nopRF"
+            }
+        ],
+        "experimentType": "randomForaging"
+
+    },
+    "hiddenRewards": { // name for each profile of in this setting file
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsHR"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_hiddenRewards"
+            }
+        ],
+        "experimentType":"hiddenRewards"
+
+    },
+    "hiddenRewardsOptoOn": { // hidden rewards with LASER or LED
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsHR"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_hiddenRewardsOptoOn"
+            }
+        ],
+        "contexts":[{
+                 "id": "LED", //laser
+                 // "type": "pulsed", 
+                 "valves": [13],
+                 // "durations": [25],//20 Hz w/ 50% duty cycle
+                 // "interval": 50,
+                 "radius": 200,
+                 "locations": [1500],
+                 "max_duration": 5,
+                 "timeout": 5005,
+                 "display_color": [100,100,185]
+             }],
+        "trial_attrs": {
+            "fields": [
+                {
+                    "key": "condition", // if this key matches a field in the
+                                           // settings.json file, the value will
+                                           // be replaced by the entry each
+                                           // trial.
+                    "type": "String"
+                },
+                {
+                    "key": "day",
+                    "type": "int"
+                },
+                {
+                    "key": "session",
+                    "type": "int"
+                },
+                {
+                    "key": "LEDstatus", //ON or OFF
+                    "type": "String",
+                },
+                {
+                    "key": "belt",
+                    "type": "String"
+                }
+            ]
+        },
+        "comment":"comments here"
+    },
+
+    "hiddenRewardsOptoOff": {  //shines the laser off of the reward zone
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsHR"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_hiddenRewardsOptoOff"
+            }
+        ],
+        "contexts":[{
+                 "id": "laser",
+                 "type": "pulsed", 
+                 "valves": [13],
+                 "durations": [25],//20 Hz w/ 50% duty cycle
+                 "interval": 50,
+                 "radius": 200,
+                 "locations": [310],
+                 "max_duration": 20,
+                 "timeout": 15005,
+                 "display_color": [100,100,185]
+             }],
+        "comment":"comments here"
+    },
+    "manualRewards": { // name for each profile of in this setting file
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_manualRewards"
+            }
+        ],
+        "comment":"comments here"
+    },
+
+    "manualPuff": { // this is still buggy. the valve opens when thisprotocol gets
+                    // loaded. Set the valve # in the box to 4 and press it. It'll
+                    // close teh valve. The same applies at the end of the exp.
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsHR"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_hiddenRewards"
+            }
+        ],
+        "context": [
+            {
+                "id": "airPuff",
+                "locations": null,
+                "pin": 4,        // airvalve
+                "max_duration": 100 //this doesn't really matter
+         }
+     ],            
+         "experimentType":"airPuff",
+     },
+
+    "alterCtxLED": { // turns on epi LED in every other lap configured w/ 3 LED locations
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_opRfWLED"
+            }
+        ],
+         "trial_attrs": {
+            "fields": [
+                {
+                    "key": "condition", // if this key matches a field in the
+                                           // settings.json file, the value will
+                                           // be replaced by the entry each
+                                           // trial.
+                    "type": "String"
+                },
+                {
+                    "key": "day",
+                    "type": "int"
+                },
+                {
+                    "key": "session",
+                    "type": "int"
+                },               
+                {
+                  "key": "belt",
+                  "type": "String",
+                }
+            ]
+        },
+        "contexts": [
+            // reward zones are an example of a context and can be configured
+            // in this list as well.
+            {
+                "class": "alternating_context",
+                "id": "LED_on", // every context is required to have a
+                                      // unique id
+                "n_lap": 2, // for class alternating_context, activate this
+                            // context only every nth lap. Defaults to 2
+//                "offset_lap": 1,
+//                "type": "operant", // specialized contexts are defined
+                                   // through the type field. operant type
+                                   // contexts are triggered via sensors i.e.
+                                   // the lickport
+                "max_duration": 20, // maximum time (in s) the context is allowed
+                                   // to be active
+                "radius": 200, // radius (in mm) of reward zones
+                "valves": [13], // list of arduino pints to activate when the
+                               // context starts
+//                "durations": [60], // list of times to open valves for
+//                "operant_rate": 2,
+//                "initial_open": 1,
+//                "sensor": 2, // pin number associated with the sensor to trigger
+                             // operant context.
+                "locations": [300, 900, 1500], // integer or list. list - list of
+                                           // locations to place context
+                                           // centroids. integer - number of
+                                           // locations to randomly shuffle
+                                           // context to. absent - context is
+                                           // active during entire trial
+                "display_color": [0,104,204] // color to make display indicating
+                                           // the location of this context
+            },
+        ]
+    },
+    "opRfWLED": { // operant random foraging with LED on at one loc
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_opRfWLED"
+            }
+        ],
+        "experimentType": "operantRandomForaging",
+        "contexts":[{
+                 "id": "LED",
+ //                "type": "pulsed", 
+                 "valves": [13],
+ //                "durations": [25], // 20 Hz w/ 50% duty cycle
+ //                "interval": 50,
+                 "radius": 150,
+                 "locations": [350],
+                 "max_duration": 20,
+                 "timeout": 15005,
+                 "display_color": [100,100,185]
+             }],
+            "trial_attrs": {
+            "fields": [
+                {
+                    "key": "condition", // if this key matches a field in the
+                                           // settings.json file, the value will
+                                           // be replaced by the entry each
+                                           // trial.
+                    "type": "String"
+                },
+                {
+                    "key": "day",
+                    "type": "int"
+                },
+                {
+                    "key": "session",
+                    "type": "int"
+                },               
+                {
+                  "key": "belt",
+                  "type": "String",
+                }
+            ]
+        }
+    },
+    "randomForLED": { // random foraging paradigm with an LED on at a specific location
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_opRfWLED"
+            }
+        ],
+        "contexts":[{
+                 "id": "LED",
+//                 "type": "pulsed", 
+                 "valves": [13],
+//                 "durations": [25], //20 Hz w/ 50% duty cycle
+//                 "interval": 50,
+                 "radius": 200,
+                 "locations": [1620],
+                 "max_duration": 20,
+                 "timeout": 20005,
+                 "display_color": [100,100,185]
+             }],
+            "trial_attrs": {
+            "fields": [
+                {
+                    "key": "condition", // if this key matches a field in the
+                                           // settings.json file, the value will
+                                           // be replaced by the entry each
+                                           // trial.
+                    "type": "String"
+                },
+                {
+                    "key": "day",
+                    "type": "int"
+                },
+                {
+                    "key": "session",
+                    "type": "int"
+                },               
+                {
+                    "key": "belt",
+                    "type": "String",
+                }
+            ]
+        },
+        "comment":"comments here"
+    },
+    "alternatingLEDPuff":  { // hidden rewards with LASER or LED
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsHR"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_hiddenRewardsOptoOn"
+            }
+        ],
+       
+        "contexts": [
+            // reward zones are an example of a context and can be configured
+            // in this list as well.
+            {
+                "id": "LED", // every context is required to have a
+                                      // unique id
+                "max_duration": 15, // maximum time (in s) the context is allowed
+                                   // to be active
+                "radius": 120, // radius (in mm) of reward zones
+                "valves": [13], // list of arduino pints to activate when the
+                               // context starts
+                "locations": [1550],
+                "display_color": [104,204,104] // color to make display indicating
+                                           // the location of this context
+            },
+            {
+                "id": "airpuff", // every context is required to have a
+                                      // unique id
+                "max_duration": 1,
+                "radius": 10, // radius (in mm) of reward zones
+                "valves": [4], // list of arduino pints to activate when the
+                               // context starts
+                "durations": [200],
+                "locations": [1550],
+                "display_color": [204,104,104], // color to make display indicating
+                                           // the location of this context
+                "decorators": [
+                    {
+                        "class": "alternating_context"
+                    }
+                ]
+            }
+        ],
+    },
+    "alternatingContextPuff": { // turns on airpuff in every other lap
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsExperiment"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_runTraining"
+            }
+        ],
+         "trial_attrs": {
+            "fields": [
+                {
+                    "key": "condition", // if this key matches a field in the
+                                           // settings.json file, the value will
+                                           // be replaced by the entry each
+                                           // trial.
+                    "type": "String"
+                },
+                {
+                    "key": "day",
+                    "type": "int"
+                },
+                {
+                    "key": "session",
+                    "type": "int"
+                },               
+                {
+                  "key": "belt",
+                  "type": "String",
+                }
+            ]
+        },
+        "contexts": [
+            // reward zones are an example of a context and can be configured
+            // in this list as well.
+            {
+                "class": "alternating_context",
+                "id": "airpuff", // every context is required to have a
+                                      // unique id
+                "n_lap": 2, // for class alternating_context, activate this
+                            // context only every nth lap. Defaults to 2
+//                "offset_lap": 1,
+                "max_duration": 0.2, // maximum time (in s) the context is allowed
+                                   // to be active
+                "radius": 5, 
+                "valves": [4], 
+                "durations": [60], // list of times to open valves for
+                "locations": [1450], 
+                "display_color": [0,104,204] // color to make display indicating
+             },
+        ]
+    },
+    "alterCtxtPuffLED": { // one lap with puff, one lap with puff+LED, one lap with LED
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            // {
+            //     "file": "experiments.json",
+            //     "tag": "_rigSettingsExperiment"
+            // },
+            // {
+            //     "file": "experiments.json",
+            //     "tag":"_opRfWLED"
+            // }
+        ],
+        "reward": {
+            "id": "reward",
+            "locations": 3,
+            "radius": 50, // radius (in mm) of the reward zones
+            "max_duration": 1, // maximum time the reward zone context is
+                               // allowed to be on (even if animal is
+                               // stationary)
+            "drop_size": 60, // time (in ms) duration for the reward water valve
+                             // to be open
+            "pin": 5,        // ardunio pin that the water reward solinoid is
+                             // connected to
+            "operant_rate": 2, // issue additional rewards for this number of
+                               // licks
+            "initial_open": 0 // 0 or 1 if set to 1 a non-operant reward is
+                              // issued when the reward zone is first entered
+        },
+        "trial_length": 900,
+        "sensors": [             // length and tag need to be modified
+            {
+              "type": "lickport", 
+              "pin": 2,           // Interrupt/IRQ pin
+              "report_pin": 20,   
+            },
+            {
+                "type": "rfid_reader", // rfid tag reader for ID-12LA reader
+                "pin": 22  // pin is the reset pin on the ID-12LA breakout
+            }
+        ],
+        "sync_pin": 12, // a ttl pulse is delivered at the beginning of each
+                        // trial to the sync pin.
+        "position_scale": -2.07, // scales the position updates from aritrary
+                               // unitst to mm. IMPORTANT! measure this value
+                               // on each rig or position updates will be wrong
+        "track_length": 2000, // length of the track/treadmill belt.
+        "lap_reset_tag": "7F001B26CF8D", //7F001B26CF8D<- gergo04; 7F001B108DF9 -> gergo06
+                             // rfid tag signaling lap resets
+        "lap_tolerance": 0.025,          
+        "trial_attrs": {
+            "fields": [
+                {
+                    "key": "condition",
+                    "type": "String"
+                },
+                {
+                    "key": "day",
+                    "type": "int"
+                },
+                {
+                    "key": "session",
+                    "type": "int"
+                },               
+                {
+                  "key": "belt",
+                  "type": "String",
+                }
+            ],
+        },
+        "contexts": [
+            // reward zones are an example of a context and can be configured
+            // in this list as well.
+            {
+                "id": "reward", // every context is required to have a
+                                      // unique id
+                "type": "operant",
+                            // context only every nth lap. Defaults to 2
+//                "offset_lap": 1,
+                "max_duration": 1, // maximum time (in s) the context is allowed
+                                   // to be active
+                "radius": 50, 
+                "valves": [5], 
+                "durations": [60], // list of times to open valves for
+                "locations": 3,
+                "initial_open": 0,
+                "sensor": 2, 
+                "display_color": [0,104,204] // color to make display indicating
+             },
+             {
+                "id": "LED",
+                "max_duration": 10000, 
+                "radius": 50, 
+                "valves": [13],
+                //"durations": [60], // list of times to open valves for
+                "locations": [350], 
+                "display_color": [250,159,181],
+                "decorators": [
+                    {"class": "scheduled_context",
+                     "lap_list": [0, 1],
+                     "repeat": 3
+                 }
+             ]
+             },
+             {
+                "id": "puff",
+                "max_duration": 0.5,
+                "radius": 5, 
+                "valves": [4], 
+                "durations": [200], // list of times to open valves for
+                "locations": [350], 
+                "display_color": [197,27,138],
+                "decorators": [
+                    {
+                        "class": "scheduled_context",
+                        "lap_list": [1, 2],
+                        "repeat": 3
+                    }
+                ]
+             },
+        ]
+    },
+    "drugTraining": { // for pharmacology exps, currently works with hidden rew params
+        "uses": [
+            {
+                "file": "controllers.json",
+                "tag":"_controllers"
+            },
+            {
+                "file": "experiments.json",
+                "tag": "_rigSettingsHR"
+            },
+            {
+                "file": "experiments.json",
+                "tag":"_hiddenRewards"
+            }
+        ],
+         "trial_attrs": {
+            "fields": [
+                {
+                    "key": "belt", // 
+                    "type": "String"
+                },
+                {
+                    "key": "condition", //drug or noDrug
+                    "type": "String"
+                },
+                {
+                    "key": "drug", //control or saline or drug's name or wash
+                    "type": "String"
+                },
+                
+            ],
+            "experimentType": "pharmacology"
+            },
+
+    },
+
+    // the _system holde the data directory field. this does not get saved each
+    // trial and needs to be set to a directory where the program can write
+    // and store files. if windows, ensure to escape backslashes i.e. \\
+    "_system": {
+        "data_directory":"G:\\DATA\\behaviorData",
+        "arduino_controller": "arduino_controller\\arduinoController.exe"
+    }
+}
